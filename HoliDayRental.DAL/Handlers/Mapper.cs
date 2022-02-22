@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace HoliDayRental.DAL.Handlers
                 Nom = (string)record[nameof(Membre.Nom)],
                 Prenom = (string)record[nameof(Membre.Prenom)],
                 Email = (string)record[nameof(Membre.Email)],
-                Pays = (string)record[nameof(Membre.Pays)],
+                Pays = (int)record[nameof(Membre.Pays)],
                 Telephone = (int)record[nameof(Membre.Telephone)],
                 Login = (string)record[nameof(Membre.Login)],
                 Password = (string)record[nameof(Membre.Password)],
@@ -34,10 +35,10 @@ namespace HoliDayRental.DAL.Handlers
             {
                 idBien = (int)record[nameof(BienEchange.idBien)],
                 titre = (string)record[nameof(BienEchange.titre)],
-                DesCourte = (string)record[nameof(BienEchange.DesCourte)],
-                DesLong = (string)record[nameof(BienEchange.DesLong)],
+                DescCourte = (string)record[nameof(BienEchange.DescCourte)],
+                DescLong = (string)record[nameof(BienEchange.DescLong)],
                 NombrePerson = (int)record[nameof(BienEchange.NombrePerson)],
-                Pays = (string)record[nameof(BienEchange.Pays)],
+                Pays = (int)record[nameof(BienEchange.Pays)],
                 Ville = (string)record[nameof(BienEchange.Ville)],
                 Rue = (string)record[nameof(BienEchange.Rue)],
                 Numero = (int)record[nameof(BienEchange.Numero)],
@@ -52,6 +53,12 @@ namespace HoliDayRental.DAL.Handlers
                 DateCreation = (DateTime)record[nameof(BienEchange.DateCreation)],
             };
         }
+
+        internal static BienEchange ToBienEchange(SqlDataReader reader)
+        {
+            throw new NotImplementedException();
+        }
+
         public static MembreBienEchange ToMembreBienEchange(IDataRecord record)
         {
             if (record is null) return null;

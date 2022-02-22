@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace HolidayRental.Common.Repositories
 {
-    interface IBienEchangeRepository
+    public interface IBienEchangeRepository<TBienEchange> : IRepository<TBienEchange, int> 
     {
+        public IEnumerable<TBienEchange> GetByPays(int pays_id);
     }
 }

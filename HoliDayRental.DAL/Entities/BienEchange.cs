@@ -10,10 +10,10 @@ namespace HoliDayRental.DAL.Entities
     {
         public int idBien { get; set; }
         public string titre { get; set; }
-        public string DesCourte { get; set; }
-        public string DesLong { get; set; }
+        public string DescCourte { get; set; }
+        public string DescLong { get; set; }
         public int NombrePerson { get; set; }
-        public string Pays { get; set; }
+        public int Pays { get; set; }
         public string Ville { get; set; }
         public string Rue { get; set; }
         public int Numero { get; set; }

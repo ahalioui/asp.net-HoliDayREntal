@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace HolidayRental.Common.Repositories
 {
-    interface IGetByMembreBienEchangeRepository
+    public interface IGetByMembreBienEchangeRepository<TEntity>
     {
+        public TEntity GetByMembreBienEnchange(int bienEchangeId);
     }
 }

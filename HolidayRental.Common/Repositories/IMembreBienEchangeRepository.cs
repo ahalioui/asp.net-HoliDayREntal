@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace HolidayRental.Common.Repositories
 {
-    interface IMembreBienEchangeRepository
+    public interface IMembreBienEchangeRepository<TMembreBienEchange> : IRepository<TMembreBienEchange, int>
+
     {
+        public IEnumerable<TMembreBienEchange> Get(DateTime dateDebut);
+        public IEnumerable<TMembreBienEchange> GetByMemberId(int membre_id);
+        public IEnumerable<TMembreBienEchange> GetByBienEchangeid(int bienEchange_id);
+
+
+
     }
 }
