@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace HoliDayRental.DAL.Entities
+namespace HoliDayRental.Models
 {
-    public class Membre
+    public class MembreDetails
     {
+        [ScaffoldColumn(false)]
+        [Key]
         public int idMembre { get; set; }
         public string Nom { get; set; }
         public string Prenom { get; set; }
@@ -17,7 +19,6 @@ namespace HoliDayRental.DAL.Entities
         public string Login { get; set; }
         public string Password { get; set; }
 
-
-
+        public IEnumerable<BienEchangeDetails> BienEchange { get; set; }
     }
 }

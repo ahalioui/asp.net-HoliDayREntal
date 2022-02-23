@@ -31,7 +31,7 @@ namespace HoliDayRental.DAL.Repositories
             {
                 using (SqlCommand command = connection.CreateCommand())
                 {
-                    command.CommandText = "SELECT [IdMember], [Nom], [Prenom],[Email], [Pays], [Telephone], [Login],[Password] FROM [Membre]";
+                    command.CommandText = "SELECT [IdMembre], [Nom], [Prenom],[Email], [Pays], [Telephone], [Login],[Password] FROM [Membre]";
                     connection.Open();
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read()) yield return Mapper.ToMembre(reader);
@@ -45,7 +45,7 @@ namespace HoliDayRental.DAL.Repositories
             {
                 using (SqlCommand command = connection.CreateCommand())
                 {
-                    command.CommandText = "SELECT [IdMember], [Nom], [Prenom],[Email], [Pays], [Telephone], [Login],[Password] FROM [Membre] WHERE [IdMembre] = @idMembre";
+                    command.CommandText = "SELECT [IdMembre], [Nom], [Prenom],[Email], [Pays], [Telephone], [Login],[Password] FROM [Membre] WHERE [IdMembre] = @idMembre";
                     SqlParameter p_idMembre = new SqlParameter() { ParameterName = "idMembre", Value = idMembre };
                     command.Parameters.Add(p_idMembre);
                     connection.Open();

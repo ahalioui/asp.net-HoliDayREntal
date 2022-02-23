@@ -14,12 +14,12 @@ namespace HoliDayRental.BLL.Entities
         public string Prenom { get; set; }
         public string Email { get; set; }
         public int Pays { get; set; }
-        public int Telephone { get; set; }
+        public string Telephone { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
-        public Membre(int id, string nom, string prenom, string email, int pays, int telephone, string login, string password)
+        public Membre(int IdMembre, string nom, string prenom, string email, int pays, string telephone, string login, string password)
         {
-            idMembre = id;
+            idMembre = IdMembre;
             Nom = nom;
             Prenom = prenom;
             Email = email;
