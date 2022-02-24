@@ -16,18 +16,28 @@ namespace HoliDayRental.DAL.Entities
         public int Pays { get; set; }
         public string Ville { get; set; }
         public string Rue { get; set; }
-        public int Numero { get; set; }
-        public int CodePostal { get; set; }
+        public string Numero { get; set; }
+        public string CodePostal { get; set; }
         public string Photo { get; set; }
         public bool AssuranceObligatoire { get; set; }
         public bool isEnabled { get; set; }
-        public DateTime DisabledDate { get; set; }
+
+        private DateTime? disabledDate;
+
+        public DateTime? GetDisabledDate()
+        {
+            return disabledDate;
+        }
+
+        public void SetDisabledDate(DateTime? value)
+        {
+            disabledDate = value;
+        }
+
         public string Latitude { get; set; }
         public string Longitude { get; set; }
         public int idMembre { get; set; }
         public DateTime DateCreation { get; set; }
-
-        
-
+        public DateTime DisabledDate { get; internal set; }
     }
 }

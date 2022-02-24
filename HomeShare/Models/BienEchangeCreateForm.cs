@@ -32,10 +32,10 @@ namespace HoliDayRental.Models
         public string Rue { get; set; }
         [Required]
         [DisplayName("Numéro")]
-        public int Numero { get; set; }
+        public string Numero { get; set; }
         [Required]
         [DisplayName("Code Postal")]
-        public int CodePostal { get; set; }
+        public string CodePostal { get; set; }
         [Required]
         [DisplayName("Photo")]
         public string Photo { get; set; }

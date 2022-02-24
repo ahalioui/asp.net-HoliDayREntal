@@ -166,5 +166,10 @@ namespace HoliDayRental.DAL.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<TBienEchange> GetByIdMembre(int Id_membre)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

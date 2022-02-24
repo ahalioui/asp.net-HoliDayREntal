@@ -28,8 +28,8 @@ namespace HoliDayRental.BLL.Entities
         public int Pays { get; set; }
         public string Ville { get; set; }
         public string Rue { get; set; }
-        public int Numero { get; set; }
-        public int CodePostal { get; set; }
+        public string Numero { get; set; }
+        public string CodePostal { get; set; }
         public string Photo { get; set; }
         public bool AssuranceObligatoire { get; set; }
         public bool isEnabled { get; set; }
@@ -39,7 +39,7 @@ namespace HoliDayRental.BLL.Entities
         public int idMembre { get; set; }
         public DateTime DateCreation { get; set; }
 
-        public BienEchange(int id, string titre, string descCourte, string descLong, int nombrePerson, int pays, string ville, string rue, int numero, int codePostal, string photo, bool assuranceObligatoire, bool IsEnabled, DateTime? disabledDate, string latitude, string longitude, int IdMembre, DateTime dateCreation)
+        public BienEchange(int id, string titre, string descCourte, string descLong, int nombrePerson, int pays, string ville, string rue, string numero, string codePostal, string photo, bool assuranceObligatoire, bool IsEnabled, DateTime? disabledDate, string latitude, string longitude, int IdMembre, DateTime dateCreation)
         {
             idBien = id;
             Titre = titre;
@@ -65,8 +65,8 @@ namespace HoliDayRental.BLL.Entities
         public BienEchange()
         {
         }
-
-        public Membre Membre { get; set; }
-      
     }
 }
+        
+
+        

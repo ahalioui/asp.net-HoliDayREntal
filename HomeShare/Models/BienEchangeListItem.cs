@@ -18,8 +18,8 @@ namespace HoliDayRental.Models
         public int Pays { get; set; }
         public string Ville { get; set; }
         public string Rue { get; set; }
-        public int Numero { get; set; }
-        public int CodePostal { get; set; }
+        public string Numero { get; set; }
+        public string CodePostal { get; set; }
         public string Photo { get; set; }
         public bool AssuranceObligatoire { get; set; }
         public bool isEnabled { get; set; }

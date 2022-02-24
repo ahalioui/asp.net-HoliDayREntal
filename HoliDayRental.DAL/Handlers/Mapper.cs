@@ -28,7 +28,7 @@ namespace HoliDayRental.DAL.Handlers
 
         }
         
-        public static BienEchange bienEchange(IDataRecord record)
+        public static BienEchange ToBienEchange(IDataRecord record)
         {
             if (record is null) return null;
             return new BienEchange
@@ -41,8 +41,8 @@ namespace HoliDayRental.DAL.Handlers
                 Pays = (int)record[nameof(BienEchange.Pays)],
                 Ville = (string)record[nameof(BienEchange.Ville)],
                 Rue = (string)record[nameof(BienEchange.Rue)],
-                Numero = (int)record[nameof(BienEchange.Numero)],
-                CodePostal = (int)record[nameof(BienEchange.CodePostal)],
+                Numero = (string)record[nameof(BienEchange.Numero)],
+                CodePostal = (string)record[nameof(BienEchange.CodePostal)],
                 Photo = (string)record[nameof(BienEchange.Photo)],
                 AssuranceObligatoire = (bool)record[nameof(BienEchange.AssuranceObligatoire)],
                 isEnabled = (bool)record[nameof(BienEchange.isEnabled)],
@@ -54,11 +54,7 @@ namespace HoliDayRental.DAL.Handlers
             };
         }
 
-        internal static BienEchange ToBienEchange(SqlDataReader reader)
-        {
-            throw new NotImplementedException();
-        }
-
+       
         public static MembreBienEchange ToMembreBienEchange(IDataRecord record)
         {
             if (record is null) return null;

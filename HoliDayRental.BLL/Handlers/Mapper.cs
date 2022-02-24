@@ -56,7 +56,7 @@ namespace HoliDayRental.BLL.Handlers
                 entity.Photo,
                 entity.AssuranceObligatoire,
                 entity.isEnabled,
-                entity.DisabledDate,
+                entity.GetDisabledDate(),
                 entity.Latitude,
                 entity.Longitude,
                 entity.idMembre,

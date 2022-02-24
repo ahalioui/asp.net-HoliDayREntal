@@ -34,7 +34,7 @@ namespace HoliDayRental.DAL.Repositories
             {
                 using (SqlCommand command = connection.CreateCommand())
                 {
-                    command.CommandText = "SELECT [IdBien], [Titre], [DescCourte], [DescLong], [NombrePerson], [Pays], [Ville], [Rue], [Numero], [CodePostal], [Photo], [AssuranceObligatoire], [isEnabled], [DisableDate], [Latitude], [Longitude], [idMembre], [DateCreation] FROM [BienEchange]";
+                    command.CommandText = "SELECT [IdBien], [Titre], [DescCourte], [DescLong], [NombrePerson], [Pays], [Ville], [Rue], [Numero], [CodePostal], [Photo], [AssuranceObligatoire], [isEnabled], [DisabledDate], [Latitude], [Longitude], [idMembre], [DateCreation] FROM [BienEchange]";
                     
                     connection.Open();
                     SqlDataReader reader = command.ExecuteReader();
@@ -50,7 +50,7 @@ namespace HoliDayRental.DAL.Repositories
             {
                 using (SqlCommand command = connection.CreateCommand())
                 {
-                    command.CommandText = "SELECT [IdBien], Titre], [DescCourte], [DescLong], [NombrePerson], [Pays], [Ville], [Rue], [Numero], [CodePostal], [Photo], [AssuranceObligatoire], [isEnabled], [DisableDate], [Latitude], [Longitude], [idMembre], [DateCreation] FROM [BienEchange] WHERE [IdBien] = @id";
+                    command.CommandText = "SELECT [IdBien], Titre], [DescCourte], [DescLong], [NombrePerson], [Pays], [Ville], [Rue], [Numero], [CodePostal], [Photo], [AssuranceObligatoire], [isEnabled], [DisabledDate], [Latitude], [Longitude], [idMembre], [DateCreation] FROM [BienEchange] WHERE [IdBien] = @id";
                     SqlParameter p_id = new SqlParameter("id", id);
                     command.Parameters.Add(p_id);
                     connection.Open();
@@ -63,43 +63,61 @@ namespace HoliDayRental.DAL.Repositories
             }
         }
 
-        public BienEchange GetByMembreBienEchangeId(int MembreBienEchangeId)
+        public IEnumerable<BienEchange> GetByIdMembre(int Id_membre)
         {
             using (SqlConnection connection = new SqlConnection(_connString))
             {
                 using (SqlCommand command = connection.CreateCommand())
                 {
-                    command.CommandText = "SELECT [BienEchange].[IdBien], [Titre], [DescCourte], [DescLong], [NombrePerson], [Pays], [Ville], [Rue], [Numero], [CodePostal], [Photo], [AssuranceObligatoire], [isEnabled], [DisableDate], [Latitude], [Longitude], [idMembre], [DateCreation] FROM [BienEchange] JOIN [MembreBienEchange] ON [BienEchange].[IdBien] = [BienEchange_id] WHERE [MembreBienEchange].[IdBien] = @id";
-                    //Parameters...
-                    SqlParameter p_id = new SqlParameter("id", MembreBienEchangeId);
-                    command.Parameters.Add(p_id);
-                    connection.Open();
-                    //Choose Execution method
-                    SqlDataReader reader = command.ExecuteReader();
-                    if (reader.Read()) return Mapper.ToBienEchange(reader);
-                    return null;
-                }
-            }
-        }
+                    command.CommandText = "SELECT [IdBien], [Titre], [DescCourte], [DescLong], [NombrePerson], [Pays], [Ville], [Rue], [Numero], [CodePostal], [Photo], [AssuranceObligatoire], [isEnabled], [DisabledDate], [Latitude], [Longitude], [idMembre], [DateCreation] FROM [BienEchanger] WHERE ([IdMembre]) = @Id_membre ";
 
-
-        public IEnumerable<BienEchange> GetByPays(int pays_id)
-        {
-            using (SqlConnection connection = new SqlConnection(_connString))
-            {
-                using (SqlCommand command = connection.CreateCommand())
-                {
-                    command.CommandText = "SELECT [IdBien], [Titre], [DescCourte], [DescLong], [NombrePerson], [Pays], [Ville], [Rue], [Numero], [CodePostal], [Photo], [AssuranceObligatoire], [isEnabled], [DisableDate], [Latitude], [Longitude], [idMembre], [DateCreation] FROM [BienEchanger] WHERE ([Pays]) = @pays ";
-                    
-                    SqlParameter p_pays = new SqlParameter("pays", pays_id);
-                    command.Parameters.Add(p_pays);
+                    SqlParameter p_idmembre = new SqlParameter("IdMembre", Id_membre);
+                    command.Parameters.Add(p_idmembre);
                     connection.Open();
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read()) yield return Mapper.ToBienEchange(reader);
-                    
+
                 }
             }
         }
+
+        //public BienEchange GetByMembreBienEchangeId(int MembreBienEchangeId)
+        //{
+        //    using (SqlConnection connection = new SqlConnection(_connString))
+        //    {
+        //        using (SqlCommand command = connection.CreateCommand())
+        //        {
+        //            command.CommandText = "SELECT [BienEchange].[IdBien], [Titre], [DescCourte], [DescLong], [NombrePerson], [Pays], [Ville], [Rue], [Numero], [CodePostal], [Photo], [AssuranceObligatoire], [isEnabled], [DisableDate], [Latitude], [Longitude], [idMembre], [DateCreation] FROM [BienEchange] JOIN [MembreBienEchange] ON [BienEchange].[IdBien] = [BienEchange_id] WHERE [MembreBienEchange].[IdBien] = @id";
+                    
+        //            SqlParameter p_id = new SqlParameter("id", MembreBienEchangeId);
+        //            command.Parameters.Add(p_id);
+        //            connection.Open();
+                    
+        //            SqlDataReader reader = command.ExecuteReader();
+        //            if (reader.Read()) return Mapper.ToBienEchange(reader);
+        //            return null;
+        //        }
+        //    }
+        //}
+
+
+        //public IEnumerable<BienEchange> GetByPays(int pays_id)
+        //{
+            //using (SqlConnection connection = new SqlConnection(_connString))
+            //{
+            //    using (SqlCommand command = connection.CreateCommand())
+            //    {
+            //        command.CommandText = "SELECT [IdBien], [Titre], [DescCourte], [DescLong], [NombrePerson], [Pays], [Ville], [Rue], [Numero], [CodePostal], [Photo], [AssuranceObligatoire], [isEnabled], [DisableDate], [Latitude], [Longitude], [idMembre], [DateCreation] FROM [BienEchanger] WHERE ([Pays]) = @pays ";
+                    
+            //        SqlParameter p_pays = new SqlParameter("pays", pays_id);
+            //        command.Parameters.Add(p_pays);
+            //        connection.Open();
+            //        SqlDataReader reader = command.ExecuteReader();
+            //        while (reader.Read()) yield return Mapper.ToBienEchange(reader);
+                    
+            //    }
+            //}
+        //}
 
         public int Insert(BienEchange entity)
         {
@@ -121,7 +139,7 @@ namespace HoliDayRental.DAL.Repositories
                     SqlParameter p_Photo = new SqlParameter("Photo", entity.Photo);
                     SqlParameter p_AssuranceObligatoire = new SqlParameter("AssuranceObligatoire", entity.AssuranceObligatoire);
                     SqlParameter p_isEnabled = new SqlParameter("isEnabled", entity.isEnabled);
-                    SqlParameter p_DisableDate = new SqlParameter("DisableDate", entity.DisabledDate);
+                    SqlParameter p_DisableDate = new SqlParameter("DisableDate", entity.GetDisabledDate());
                     SqlParameter p_Latitude = new SqlParameter("Latitude", entity.Latitude);
                     SqlParameter p_Longitude = new SqlParameter("Longitude", entity.Longitude);
                     SqlParameter p_idMembre = new SqlParameter("idMembre", entity.idMembre);
@@ -154,7 +172,7 @@ namespace HoliDayRental.DAL.Repositories
             {
                 using (SqlCommand command = connection.CreateCommand())
                 {
-                    command.CommandText = "UPDATE [BienEchange] SET [Titre] = @titre, [DescCourte] = @DescCourte, [DescLong] = @DescLong, [NombrePerson] = @NombrePerson, [Pays] = @Pays, [Ville] = @Ville, [Rue] = @Rue, [Numero] = @Numero, [CodePostal] = @CodePostal, [Photo] = @Photo, [AssuranceObligatoire] = @AssuranceObligatoire, [isEnabled] = @isEnabled, [DisableDate] = @DisableDate, [Latitude] = @Latitude, [Longitude] = @Longitude, [idMembre] = @idMembre, [DateCreation] = @DateCreation WHERE [IdBien] = @id";
+                    command.CommandText = "UPDATE [BienEchange] SET [Titre] = @titre, [DescCourte] = @DescCourte, [DescLong] = @DescLong, [NombrePerson] = @NombrePerson, [Pays] = @Pays, [Ville] = @Ville, [Rue] = @Rue, [Numero] = @Numero, [CodePostal] = @CodePostal, [Photo] = @Photo, [AssuranceObligatoire] = @AssuranceObligatoire, [isEnabled] = @isEnabled, [DisabledDate] = @DisableDate, [Latitude] = @Latitude, [Longitude] = @Longitude, [idMembre] = @idMembre, [DateCreation] = @DateCreation WHERE [IdBien] = @id";
                     SqlParameter p_titre = new SqlParameter("titre", entity.titre);
                     SqlParameter p_DescCourte = new SqlParameter("DescCourte", entity.DescCourte);
                     SqlParameter p_DescLong = new SqlParameter("DescLong", entity.DescLong);
@@ -167,7 +185,7 @@ namespace HoliDayRental.DAL.Repositories
                     SqlParameter p_Photo = new SqlParameter("Photo", entity.Photo);
                     SqlParameter p_AssuranceObligatoire = new SqlParameter("AssuranceObligatoire", entity.AssuranceObligatoire);
                     SqlParameter p_isEnabled = new SqlParameter("isEnabled", entity.isEnabled);
-                    SqlParameter p_DisableDate = new SqlParameter("DisableDate", entity.DisabledDate);
+                    SqlParameter p_DisableDate = new SqlParameter("DisableDate", entity.GetDisabledDate());
                     SqlParameter p_Latitude = new SqlParameter("Latitude", entity.Latitude);
                     SqlParameter p_Longitude = new SqlParameter("Longitude", entity.Longitude);
                     SqlParameter p_idMembre = new SqlParameter("idMembre", entity.idMembre);
@@ -195,6 +213,11 @@ namespace HoliDayRental.DAL.Repositories
                     
                 }
             }
+        }
+
+        IEnumerable<TBienEchange> IRepository<BienEchange, int>.GetByIdMembre(int Id_membre)
+        {
+            throw new NotImplementedException();
         }
     }
 }

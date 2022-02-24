@@ -15,12 +15,12 @@ namespace HoliDayRental.Controllers
 
     {
         private readonly IBienEchangeRepository<BienEchange> _bienEchangeService;
-        private readonly IMembreBienEchangeRepository<MembreBienEchange> _membreBienEchangeService;
+       
 
-        public BienEchangeController(IBienEchangeRepository<BienEchange> bienEchangeService, IMembreBienEchangeRepository<MembreBienEchange> membreBienEchangeService)
+        public BienEchangeController(IBienEchangeRepository<BienEchange> bienEchangeService)
         {
             _bienEchangeService = bienEchangeService;
-            _membreBienEchangeService = membreBienEchangeService;
+            
         }
         
         public ActionResult Index(bool? sorted)
@@ -37,7 +37,6 @@ namespace HoliDayRental.Controllers
         public ActionResult Details(int id)
         {
             BienEchangeDetails model = _bienEchangeService.Get(id).ToDetails();
-            model.BienEchanges = _bienEchangeService.GetByPays(id).Select(l => l.ToDetails());
             return View(model);
         }
 
@@ -94,42 +93,76 @@ namespace HoliDayRental.Controllers
         // GET: BienEchangeController/Edit/5
         public ActionResult Edit(int id)
         {
+            BienEchangeEditForm model = _bienEchangeService.Get(id).ToEditForm();
             return View();
         }
 
         // POST: BienEchangeController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, BienEchangeEditForm entity)
+
         {
+            BienEchange result = _bienEchangeService.Get(id);
+
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (result is null) throw new Exception("Pas de Bien avec cette identifiant");
+                if (!(ModelState.IsValid)) throw new Exception();//test de validation
+
+                result.Titre = entity.titre;
+                result.DescCourte = entity.DescCourte;
+                result.DescLong = entity.DescLong;
+                result.NombrePerson = entity.NombrePerson;
+                result.Pays = entity.Pays;
+                result.Ville = entity.Ville;
+                result.Rue = entity.Rue;
+                result.Numero = entity.Numero;
+                result.CodePostal = entity.CodePostal;
+                result.Photo = entity.Photo;
+                result.AssuranceObligatoire = entity.AssuranceObligatoire;
+                result.isEnabled = entity.isEnabled;
+                result.Latitude = entity.Latitude;
+                result.Longitude = entity.Longitude;
+                result.idMembre = entity.idMembre;
+                result.DateCreation = entity.DateCreation;
+                _bienEchangeService.Update(id, result);
+                return RedirectToAction(nameof(Index));//Mise à jour du bien 
             }
-            catch
+            catch(Exception e)
             {
-                return View();
+                ViewBag.Error = e.Message;
+                if (result is null) return RedirectToAction(nameof(Index));
+                return View(result.ToEditForm());
             }
         }
 
         // GET: BienEchangeController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+
+            BienEchangeDeleteForm model = _bienEchangeService.Get(id).ToDeleteForm();
+            return View(model);
         }
 
         // POST: BienEchangeController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, BienEchangeDeleteForm collection)
         {
+            BienEchange result = _bienEchangeService.Get(id);
             try
             {
+                if (result is null) throw new Exception("Pas de bien avec cet identifiant");
+                if (!ModelState.IsValid) throw new Exception();
+                if (!collection.Validate) throw new Exception("Cetteaction n'est pas valide");
+                _bienEchangeService.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                ViewBag.Error = e.Message;
+                return RedirectToAction(nameof(Index));
             }
         }
     }

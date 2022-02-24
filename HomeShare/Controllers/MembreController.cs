@@ -30,7 +30,7 @@ namespace HoliDayRental.Controllers
         public IActionResult Details(int id)
         {
             MembreDetails model = _membreService.Get(id).ToDetails();
-            model.BienEchange = _bienEchangeService.GetByPays(id).Select(b => b.ToDetails());
+            model.BienEchange = _bienEchangeService.GetByIdMembre(id).Select(b => b.ToDetails());
             return View(model);
         }
     }

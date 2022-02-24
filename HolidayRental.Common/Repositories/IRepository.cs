@@ -11,6 +11,6 @@ namespace HolidayRental.Common.Repositories
         TId Insert(TEntity entity);
         void Delete(TId id);
         void Update(TId id, TEntity entity);
-
+       public IEnumerable<TBienEchange> GetByIdMembre(int Id_membre);
     }
 }
