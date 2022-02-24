@@ -9,5 +9,6 @@ namespace HolidayRental.Common.Repositories
     public interface IBienEchangeRepository<TBienEchange> : IRepository<TBienEchange, int> 
     {
         public IEnumerable<TBienEchange> GetByPays(int pays_id);
+       
     }
 }

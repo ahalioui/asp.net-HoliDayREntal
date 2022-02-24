@@ -12,12 +12,12 @@ namespace HoliDayRental.BLL.Entities
         public int idBien { get; set; }
         public DateTime DateDebEchange { get; set; }
         public DateTime DateFinEchange { get; set; }
-        public bool Assurance { get; set; }
+        public bool? Assurance { get; set; }
         public bool Valide { get; set; }
         public Membre Membre { get; set; }
         public BienEchange BienEchange { get; set; }
 
-        public MembreBienEchange(int IdMembre, int IdBien, DateTime dateDebEchange, DateTime dateFinEchange, bool assurance, bool valide)
+        public MembreBienEchange(int IdMembre, int IdBien, DateTime dateDebEchange, DateTime dateFinEchange, bool? assurance, bool valide)
         {
             idMembre = IdMembre;
             idBien = IdBien;

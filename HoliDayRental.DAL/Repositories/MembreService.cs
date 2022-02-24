@@ -116,7 +116,7 @@ namespace HoliDayRental.DAL.Repositories
                     SqlParameter p_prenom = new SqlParameter { ParameterName = "prenom", Value = entity.Prenom };
                     SqlParameter p_email = new SqlParameter { ParameterName = "email", Value = entity.Email };
                     SqlParameter p_pays = new SqlParameter { ParameterName = "pays", Value = entity.Pays };
-                    SqlParameter p_telephone = new SqlParameter { ParameterName = "telephone", Value = entity.Telephone };
+                    SqlParameter p_telephone = new SqlParameter { ParameterName = "telephone", Value = entity.Telephone};
                     SqlParameter p_login = new SqlParameter { ParameterName = "login", Value = entity.Login };
                     SqlParameter p_password = new SqlParameter { ParameterName = "password", Value = entity.Password };
                     command.Parameters.Add(p_nom);
@@ -143,7 +143,7 @@ namespace HoliDayRental.DAL.Repositories
                     SqlParameter p_prenom = new SqlParameter { ParameterName = "prenom", Value = entity.Prenom };
                     SqlParameter p_email = new SqlParameter { ParameterName = "email", Value = entity.Email };
                     SqlParameter p_pays = new SqlParameter { ParameterName = "pays", Value = entity.Pays };
-                    SqlParameter p_telephone = new SqlParameter { ParameterName = "telephone", Value = entity.Telephone };
+                    SqlParameter p_telephone = new SqlParameter { ParameterName = "telephone", Value = entity.Telephone};
                     SqlParameter p_login = new SqlParameter { ParameterName = "login", Value = entity.Login };
                     SqlParameter p_password = new SqlParameter { ParameterName = "password", Value = entity.Password };
                     SqlParameter p_idMembre = new SqlParameter() { ParameterName = "idMembre", Value = idMembre };

@@ -63,7 +63,32 @@ namespace HoliDayRental.Handlers
                 idMembre = entity.idMembre,
                 DateCreation = entity.DateCreation
             };
-        }
 
+        }
+        public static BienEchangeListItem ToListItem(this BienEchange entity)
+        {
+            if (entity == null) return null;
+            return new BienEchangeListItem
+            {
+                idBien = entity.idBien,
+                titre = entity.Titre,
+                DescCourte = entity.DescCourte,
+                DescLong = entity.DescLong,
+                NombrePerson = entity.NombrePerson,
+                Pays = entity.Pays,
+                Ville = entity.Ville,
+                Rue = entity.Rue,
+                Numero = entity.Numero,
+                CodePostal = entity.CodePostal,
+                Photo = entity.Photo,
+                AssuranceObligatoire = entity.AssuranceObligatoire,
+                isEnabled = entity.isEnabled,
+                Latitude = entity.Latitude,
+                Longitude = entity.Longitude,
+                idMembre = entity.idMembre,
+                DateCreation = entity.DateCreation
+            };
+
+        }
     }
 }

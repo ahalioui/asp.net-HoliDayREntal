@@ -27,5 +27,7 @@ namespace HoliDayRental.DAL.Entities
         public int idMembre { get; set; }
         public DateTime DateCreation { get; set; }
 
+        
+
     }
 }

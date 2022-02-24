@@ -106,7 +106,7 @@ namespace HoliDayRental.BLL.Handlers
                 idMembre = entity.idMembre,
                 DateDebEchange = entity.DateDebEchange,
                 DateFinEchange = entity.DateFinEchange,
-                Assurance = entity.Assurance,
+                Assurance = (bool)entity.Assurance,
                 Valide = entity.Valide
             };
         }

@@ -23,9 +23,13 @@ namespace HoliDayRental.Controllers
             _membreBienEchangeService = membreBienEchangeService;
         }
         
-        public ActionResult Index()
+        public ActionResult Index(bool? sorted)
         {
             IEnumerable<BienEchangeListItem> model = _bienEchangeService.Get().Select(b => b.ToListItem());
+            if(!(sorted is null) && sorted == true)
+            {
+                model = model.OrderBy(e => e.Pays);
+            }
             return View(model);
         }
 
@@ -33,7 +37,7 @@ namespace HoliDayRental.Controllers
         public ActionResult Details(int id)
         {
             BienEchangeDetails model = _bienEchangeService.Get(id).ToDetails();
-            model.BienEchanges = _membreBienEchangeService.GetByBienEchangeid(id).Select(l => l.ToDetails());
+            model.BienEchanges = _bienEchangeService.GetByPays(id).Select(l => l.ToDetails());
             return View(model);
         }
 
@@ -46,15 +50,44 @@ namespace HoliDayRental.Controllers
         // POST: BienEchangeController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(BienEchangeCreateForm collection)
         {
             try
             {
+                if (!ModelState.IsValid) throw new Exception();
+                BienEchange result = new BienEchange()
+                {
+                    idBien = 0,
+                    Titre = collection.titre,
+                    DescCourte = collection.DescCourte,
+                    DescLong = collection.DescLong,
+                    NombrePerson = collection.NombrePerson,
+                    Pays = collection.Pays,
+                    Ville = collection.Ville,
+                    Rue = collection.Rue,
+                    Numero = collection.Numero,
+                    CodePostal = collection.CodePostal,
+                    Photo = collection.Photo,
+                    Latitude = collection.Latitude,
+                    Longitude = collection.Longitude,
+                    AssuranceObligatoire = true,
+                    isEnabled=false,
+                    DisabledDate=null,
+                    idMembre=0,
+                    DateCreation=DateTime.Now
+
+
+
+
+
+                };
+                this._bienEchangeService.Insert(result);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                ViewBag.Error = e.Message;
+                return View(collection);
             }
         }
 

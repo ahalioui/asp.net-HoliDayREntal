@@ -32,6 +32,11 @@ namespace HoliDayRental.BLL.Services
             return _bienEchangeRepository.Get().Select(b => b.ToBLL());
         }
 
+        public IEnumerable<BienEchange> GetByBienEchangeid(int bienEchange_id)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<BienEchange> GetByPays(int pays_id)
         {
             return _bienEchangeRepository.GetByPays(pays_id).Select(b => b.ToBLL());

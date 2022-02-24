@@ -7,41 +7,48 @@ using System.Threading.Tasks;
 
 namespace HoliDayRental.Models
 {
-    public class BienEchangeDetails
+    public class BienEchangeCreateForm
     {
-        [ScaffoldColumn(false)]
-        [Key]
-        public int idBien { get; set; }
+        [Required]
+        [DisplayName("Tire")]
         public string titre { get; set; }
-        [DisplayName("Descrition Courte")]
-        [DataType("text")]
+        [Required]
+        [DisplayName("Description Courte")]
         public string DescCourte { get; set; }
-        [DisplayName("Descrition Longue")]
-        [DataType("text")]
+        [Required]
+        [DisplayName("Description complète")]
         public string DescLong { get; set; }
+        [Required]
         [DisplayName("Nombre de personne")]
-        [DataType("number")]
         public int NombrePerson { get; set; }
+        [Required]
+        [DisplayName("Pays")]
         public int Pays { get; set; }
+        [Required]
+        [DisplayName("Ville")]
         public string Ville { get; set; }
+        [Required]
+        [DisplayName("Rue")]
         public string Rue { get; set; }
+        [Required]
+        [DisplayName("Numéro")]
         public int Numero { get; set; }
+        [Required]
         [DisplayName("Code Postal")]
-        [DataType("number")]
         public int CodePostal { get; set; }
+        [Required]
+        [DisplayName("Photo")]
         public string Photo { get; set; }
-        public bool AssuranceObligatoire { get; set; }
-        public bool isEnabled { get; set; }
-        public DateTime DisabledDate { get; set; }
+        [Required]
+        [DisplayName("Latitude")]
         public string Latitude { get; set; }
+        [Required]
+        [DisplayName("Longitude")]
         public string Longitude { get; set; }
-        public int idMembre { get; set; }
-        [DisplayName("Date de creation")]
-        [DataType("datetime-local")]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy hh:mm}")]
-        public DateTime DateCreation { get; set; }
 
-        public IEnumerable<BienEchangeDetails> BienEchanges{ get; set; } 
 
+
+        
     }
 }
+
